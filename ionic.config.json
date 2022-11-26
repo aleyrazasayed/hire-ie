@@ -1,0 +1,8 @@
+{
+  "name": "Hire.ie",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "angular",
+  "id": "da0ee202"
+}
