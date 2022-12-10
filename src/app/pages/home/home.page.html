@@ -1,0 +1,21 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-title>
+      <ion-button>HireMe.ie</ion-button>
+    </ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+  <ion-header collapse="condense">
+    <ion-toolbar>
+      <ion-title size="large">      <ion-button>HireMe.ie</ion-button>
+      </ion-title>
+    </ion-toolbar>
+  </ion-header>
+
+  <div id="container">
+    <ion-button expand="full" color="secondary" (click)="redirectSearch()" routerDirection="forward">Search Job</ion-button>
+    <ion-button expand="full" color="secondary">Post Jobs</ion-button>
+  </div>
+</ion-content>

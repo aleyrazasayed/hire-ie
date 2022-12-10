@@ -3,13 +3,9 @@ import { PreloadAllModules, RouterModule, Routes } from '@angular/router';
 
 const routes: Routes = [
   {
-    path: 'home',
-    loadChildren: () => import('./home/home.module').then( m => m.HomePageModule)
+    path: '',
+    loadChildren: () => import('./pages/start/start.module').then( m => m.StartPageModule)
   },
-  // {
-  //   path: '',
-  //   loadChildren: () => import('./pages/start/start.module').then( m => m.StartPageModule)
-  // },
   {
     path: 'login',
     loadChildren: () => import('./pages/login/login.module').then( m => m.LoginPageModule)
@@ -18,15 +14,34 @@ const routes: Routes = [
     path: 'register',
     loadChildren: () => import('./pages/register/register.module').then( m => m.RegisterPageModule)
   },
+  // {
+  //   path: 'recruiter-home',
+  //   loadChildren: () => import('./pages/recruiter-home/recruiter-home.module').then( m => m.RecruiterHomePageModule)
+  // },
+  // {
+  //   path: 'posted-jobs',
+  //   loadChildren: () => import('./pages/recruiter-home/posted-jobs/posted-jobs.module').then( m => m.PostedJobsPageModule)
+  // },
+  // {
+  //   path: 'applicant-home',
+  //   loadChildren: () => import('./pages/applicant-home/applicant-home.module').then( m => m.ApplicantHomePageModule)
+  // },
+  // {
+  //   path: 'saved-jobs',
+  //   loadChildren: () => import('./pages/applicant-home/saved-jobs/saved-jobs.module').then( m => m.SavedJobsPageModule)
+  // },
   {
-    path: 'message/:id',
-    loadChildren: () => import('./view-message/view-message.module').then( m => m.ViewMessagePageModule)
+    path: 'menu',
+    loadChildren: () => import('./pages/common/menu/menu.module').then( m => m.MenuPageModule)
   },
-  {
-    path: '',
-    redirectTo: 'home',
-    pathMatch: 'full'
-  },
+  // {
+  //   path: 'applied-jobs',
+  //   loadChildren: () => import('./pages/applicant-home/applied-jobs/applied-jobs.module').then( m => m.AppliedJobsPageModule)
+  // },
+  // {
+  //   path: 'view-job',
+  //   loadChildren: () => import('./pages/view-job/view-job.module').then( m => m.ViewJobPageModule)
+  // }
 ];
 
 @NgModule({

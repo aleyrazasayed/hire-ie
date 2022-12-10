@@ -1,19 +1,20 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-import { ViewMessagePage } from './view-message.page';
 
 import { IonicModule } from '@ionic/angular';
 
-import { ViewMessagePageRoutingModule } from './view-message-routing.module';
+import { MenuPageRoutingModule } from './menu-routing.module';
+
+import { MenuPage } from './menu.page';
 
 @NgModule({
   imports: [
     CommonModule,
     FormsModule,
     IonicModule,
-    ViewMessagePageRoutingModule
+    MenuPageRoutingModule
   ],
-  declarations: [ViewMessagePage]
+  declarations: [MenuPage]
 })
-export class ViewMessagePageModule {}
+export class MenuPageModule {}

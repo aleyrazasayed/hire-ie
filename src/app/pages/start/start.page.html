@@ -1,0 +1,44 @@
+<!-- <ion-header> 
+</ion-header>
+
+ 
+<ion-content>
+  
+  <h2 style="align-self: center;">Get Started?</h2>
+  <ion-button fill="clear" (click)="redirectLogin()" routerDirection="forward">Continue <ion-icon slot="end" name="arrow-forward"></ion-icon></ion-button>
+
+</ion-content>
+ -->
+
+
+ <ion-header>
+  <ion-toolbar>
+    <ion-title>
+     <img expand="block" src="/assets/icon/logo1.png">
+    </ion-title>
+  </ion-toolbar>
+</ion-header>
+<br>
+<br>
+<ion-content class="form" style="background-color: rgb(39, 38, 38);">
+  <ion-grid>
+    <ion-row>
+      <ion-col align-self-center>
+        <ion-button [routerLink]="['/register']" expand="block" color="dark">Register</ion-button>
+
+        <!-- <span class="divider line one-line"></span> -->
+<br>
+        <span class="already">Already have an account?</span>
+
+        <ion-button [routerLink]="['/login']" expand="block" color="dark">Sign In</ion-button>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+</ion-content>
+
+<!-- <ion-content  *ngIf= "showSplash" >
+  
+  <img expand="block" style="height: 100%;width: 100%;" src="/assets/icon/background1.png">
+  
+</ion-content> -->
+
