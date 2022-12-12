@@ -1,0 +1,51 @@
+<ion-content>
+  
+  <ion-toolbar color="dark">  
+    <ion-buttons slot="start">  
+      <ion-button class="light" name="arrow-round-back" (click)= "route.navigate(['applicant-home'])">Back</ion-button>
+    </ion-buttons>  
+    <ion-title>  
+    <!-- {{pageName ? pageName : 'HireMe.ie'}}  -->
+
+</ion-title>  
+  </ion-toolbar>  
+  <ion-card *ngFor= 'let job of jobList; let i = index'>
+    <ion-card-header>
+     
+      
+      <ion-card-subtitle>{{job?.level}}</ion-card-subtitle> 
+     
+      <ion-card-title>{{job?.title}}</ion-card-title>
+   
+
+    </ion-card-header>
+  
+    <ion-card-content>
+      <!-- <pre> -->
+        <!-- <p><b>Description:</b> {{job.description}}</p> -->
+        <!-- <p><b>Responsibilities:</b> {{job.responsibilities}}</p> -->
+        <p><b>Company Name:</b> {{job?.company}}</p>
+        <p><b>Technologies:</b> {{job?.technologies}}</p>
+        <p><b>Salary:</b> €{{job?.salary}}</p>
+        <p><b>Type:</b> {{job?.job_type}}</p>
+
+
+      <!-- </pre> -->
+    </ion-card-content>
+    <!-- <ion-button color="dark">View Job</ion-button> -->
+    <ion-button class="apply-button" (click)= "viewJobs(i)" color="dark">View Job</ion-button>
+
+    <!-- <ion-card-content>
+      <pre>
+        <p>Responsibilities: {{jobList[0]?.responsibilities}}</p>
+        <p>Salary: €{{jobList[0]?.salary}}</p>
+        <p>Type: {{jobList[0]?.job_type}}</p>
+
+
+      </pre>
+    </ion-card-content> -->
+  </ion-card>
+  <ion-card *ngIf= "!jobList?.length">
+    <ion-card-title>No saved jobs!</ion-card-title>
+  </ion-card>
+</ion-content>

@@ -34,7 +34,7 @@ export class LoginPage implements OnInit,OnDestroy {
   login(){
     this.loginService.getAllUsers().subscribe(resp=>{
       console.log(JSON.stringify(resp))
-     const userobj = resp.filter( (user: { email: any; }) => user.email  === this.loginForm.get('email')?.value)[0]
+     const userobj = resp.filter( (user: any ) => user.email  === this.loginForm.get('email')?.value)[0]
      if(userobj && (userobj.password === this.loginForm.get('password')?.value)){
        localStorage.setItem('email',this.loginForm.get('email')?.value);
 
@@ -46,7 +46,9 @@ export class LoginPage implements OnInit,OnDestroy {
      } else {
       this.toastr.presentToast('Invalid email or password','danger');
      }
-    })
+    }),((err: any) => {
+      console.log(err)
+    });
   }
 
   ngOnDestroy(): void {

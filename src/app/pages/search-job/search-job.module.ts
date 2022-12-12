@@ -4,18 +4,17 @@ import { FormsModule } from '@angular/forms';
 
 import { IonicModule } from '@ionic/angular';
 
-import { MenuPageRoutingModule } from './menu-routing.module';
+import { SearchJobPageRoutingModule } from './search-job-routing.module';
 
-import { MenuPage } from './menu.page';
+import { SearchJobPage } from './search-job.page';
 
 @NgModule({
   imports: [
     CommonModule,
     FormsModule,
     IonicModule,
-    MenuPageRoutingModule
+    SearchJobPageRoutingModule
   ],
-  declarations: [MenuPage],
-  exports: [MenuPage]
+  declarations: [SearchJobPage]
 })
-export class MenuPageModule {}
+export class SearchJobPageModule {}

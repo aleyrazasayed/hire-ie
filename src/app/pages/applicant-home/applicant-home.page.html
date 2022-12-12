@@ -1,0 +1,84 @@
+<!-- <ion-header>
+  <ion-toolbar>
+    <ion-title>search-job</ion-title>
+  </ion-toolbar>
+  _location
+company
+description
+job_type
+level
+salary
+title
+
+</ion-header> -->
+
+<ion-content>
+  <div>
+    <app-menu [pageName] = "SearchJob"></app-menu>
+
+  <ion-searchbar placeholder="Search" [(ngModel)]= "filterTerm" animated="true"></ion-searchbar>
+<!-- <form [formGroup]= "filterForm">
+  <ion-select placeholder="Select One" style="" formControlName="job_type">
+    <ion-select-option value="Part-Time">Part-Time</ion-select-option>
+    <ion-select-option value="Full-Time">Full-Time</ion-select-option>
+    <ion-select-option value="Contract">Contract</ion-select-option>
+  </ion-select>
+  <ion-select placeholder="Select One" formControlName="level">
+    <ion-select-option value="Entry">Entry</ion-select-option>
+    <ion-select-option value="Mid">Mid</ion-select-option>
+    <ion-select-option value="Senior">Senior</ion-select-option>
+    <ion-select-option value="Managerial">Managerial</ion-select-option>
+  </ion-select>
+</form> -->
+  <!-- <ion-button class="dark" (click)= "openFilter()">Filter</ion-button> -->
+
+  <div *ngIf = "!isLoad">
+
+  <ion-card *ngFor= 'let job of jobList | filter:filterTerm; let i = index'>
+    <ion-card-header>
+      <a style="display: inline-block;position: absolute;right: 0;color: black;" (click)= "saveJobs(job,i)"><ion-icon class="dark" size="large" style="float: right;" [name]= "!job?.isSaved ? 'add-circle' : 'remove-circle'"></ion-icon>
+      </a> 
+      
+      <ion-card-subtitle>{{job.level}}</ion-card-subtitle> 
+     
+      <ion-card-title>{{job.title}}</ion-card-title>
+   
+
+    </ion-card-header>
+  
+    <ion-card-content>
+      <!-- <pre> -->
+        <!-- <p><b>Description:</b> {{job.description}}</p> -->
+        <!-- <p><b>Responsibilities:</b> {{job.responsibilities}}</p> -->
+        <p><b>Company Name:</b> {{job.company}}</p>
+        <p><b>Technologies:</b> {{job.technologies}}</p>
+        <p><b>Salary:</b> €{{job.salary}}</p>
+        <p><b>Type:</b> {{job.job_type}}</p>
+
+
+      <!-- </pre> -->
+    </ion-card-content>
+    <!-- <ion-button color="dark">View Job</ion-button> -->
+    <ion-button class="apply-button" (click)= "viewJobs(i)" color="dark">View Job</ion-button>
+
+    <!-- <ion-card-content>
+      <pre>
+        <p>Responsibilities: {{jobList[0]?.responsibilities}}</p>
+        <p>Salary: €{{jobList[0]?.salary}}</p>
+        <p>Type: {{jobList[0]?.job_type}}</p>
+
+
+      </pre>
+    </ion-card-content> -->
+  </ion-card>
+  
+</div>
+
+<div *ngIf = "isLoad">
+  <ion-spinner name="bubbles"></ion-spinner>
+</div>
+</div>
+
+</ion-content>
+
+
