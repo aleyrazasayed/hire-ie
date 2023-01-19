@@ -1,30 +1,75 @@
 <ion-header>
   <ion-toolbar>
-    <app-menu [pageName]= "pageName" ></app-menu>
-    
+    <app-menu [pageName]="pageName"></app-menu>
   </ion-toolbar>
 </ion-header>
 
 <ion-content>
-
   <ion-card-header>
-      
-    <ion-card-subtitle>{{currentObj?.level}}</ion-card-subtitle> 
-   
-    <ion-card-title>{{currentObj?.title}}</ion-card-title>
+    <ion-card-subtitle>{{currentObj?.level}}</ion-card-subtitle>
 
+    <ion-card-title>{{currentObj?.title}}</ion-card-title>
   </ion-card-header>
 
   <ion-card-content>
+    <p><b>Company Name:</b> {{currentObj?.company}}</p>
+    <p><b>Technologies:</b> {{currentObj?.technologies}}</p>
+    <p><b>Salary:</b> €{{currentObj?.salary}}</p>
+    <p><b>Type:</b> {{currentObj?.job_type}}</p>
+    <br />
+    <p><b>Description:</b> {{currentObj?.description}}</p>
+    <br />
+    <p><b>Responsibilities:</b> {{currentObj?.responsibilities}}</p>
+    <br />
+    <ion-button
+      color="light"
+      (click)="isRecruiter?route.navigate(['recruiter-home']):route.navigate(['applicant-home'])"
+      >Back
+    </ion-button>
+    <ion-button
+      *ngIf="!isRecruiter"
+      (click)="applyJob(currentObj)"
+      [disabled]="isApplied"
+      >{{isApplied ? 'Applied' : 'Apply'}}
+    </ion-button>
+  </ion-card-content>
 
-      <p><b>Company Name:</b> {{currentObj?.company}}</p>
-      <p><b>Technologies:</b> {{currentObj?.technologies}}</p>
-      <p><b>Salary:</b> €{{currentObj?.salary}}</p>
-      <p><b>Type:</b> {{currentObj?.job_type}}</p><br>
-      <p><b>Description:</b> {{currentObj?.description}}</p><br>
-      <p><b>Responsibilities:</b> {{currentObj?.responsibilities}}</p> <br>
-<ion-button color="light" (click)= "route.navigate(['applicant-home'])">Back</ion-button>
-<ion-button (click)= "applyJob(currentObj)" [disabled]= "isApplied">{{isApplied ? 'Applied' : 'Apply'}}</ion-button>
-
-  </ion-card-content> 
+  <ng-container *ngIf="isRecruiter">
+    <ion-card-header>
+      <ion-card-title>Applicants</ion-card-title>
+    </ion-card-header>
+    <ion-card-content>
+      <ion-list lines="inset" *ngFor="let applicant of applicants">
+        <ion-item>
+          <ion-label>
+            <p>Email: {{ applicant.user.email }}</p>
+            <p>CV:<a *ngIf="applicant.user.resume" [href]="applicant.user.resume.url">
+                {{ applicant.user.resume.name }}
+              </a></p>
+              <p>
+                <ng-container *ngIf="applicant.job.status === 'pending'">
+                  <ion-button
+                    slot="start"
+                    color="danger"
+                    (click)="rejectApplicant(applicant)"
+                  >
+                    <ion-icon name="trash"></ion-icon>
+                  </ion-button>
+                  <ion-button
+                    slot="start"
+                    color="success"
+                    (click)="acceptApplicant(applicant)"
+                  >
+                    <ion-icon name="checkmark"> </ion-icon>
+                  </ion-button>
+                </ng-container>
+                <ng-container *ngIf="applicant.job.status != 'pending'">
+                  <ion-badge slot="start">{{ applicant.job.status }}</ion-badge>
+                </ng-container>
+              </p>
+          </ion-label>
+        </ion-item>
+      </ion-list>
+    </ion-card-content>
+  </ng-container>
 </ion-content>

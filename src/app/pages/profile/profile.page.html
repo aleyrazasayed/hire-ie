@@ -1,0 +1,51 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button></ion-back-button>
+    </ion-buttons>
+    <ion-title>{{pageName}}</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-card>
+    <ion-card-content>
+      <form [formGroup]="profileGroup" (ngSubmit)="onSubmit()">
+        <ion-item>
+          <ion-label>First Name:</ion-label>
+          <ion-input type="text" formControlName="firstName"></ion-input>
+        </ion-item>
+        <ion-item>
+          <ion-label>Last Name:</ion-label>
+          <ion-input type="text" formControlName="lastName"></ion-input>
+        </ion-item>
+        <ion-item>
+          <ion-label>Email:</ion-label>
+          <ion-input type="text" formControlName="email"></ion-input>
+        </ion-item>
+        <ion-item>
+          <ion-label>Resume:</ion-label>
+          <ion-input
+            type="file"
+            formControlName="resume"
+            (change)="onFileChange($event)"
+          ></ion-input>
+          <ion-note slot="helper"
+            ><a *ngIf="user && user.resume" [href]="user.resume.url"
+              >{{ user.resume.name }}</a
+            ></ion-note
+          >
+        </ion-item>
+        <ion-item>
+          <ion-spinner *ngIf="loading"></ion-spinner>
+          <ion-button
+            shape="round"
+            type="submit"
+            [disabled]="loading ||!profileGroup.valid"
+            >Save</ion-button
+          >
+        </ion-item>
+      </form>
+    </ion-card-content>
+  </ion-card>
+</ion-content>

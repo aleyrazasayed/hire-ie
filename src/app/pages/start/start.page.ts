@@ -11,19 +11,16 @@ import { SplashScreen } from '@awesome-cordova-plugins/splash-screen/ngx';
 export class StartPage implements OnInit {
   showSplash = true;
 
-  constructor(public route:Router, private splashScreen: SplashScreen) { }
-
+  constructor(public route: Router, private splashScreen: SplashScreen) {}
 
   ngOnInit() {
     setTimeout(() => {
-      this.showSplash = false
+      this.showSplash = false;
     }, 3500);
-    
 
-// this.splashScreen.hide();
+    // this.splashScreen.hide();
   }
-  redirectLogin(){
-    this.route.navigateByUrl('/login')
+  redirectLogin() {
+    this.route.navigateByUrl('/login');
   }
-
 }

@@ -8,15 +8,14 @@ import { RecruiterHomePageRoutingModule } from './recruiter-home-routing.module'
 
 import { RecruiterHomePage } from './recruiter-home.page';
 import { MenuPage } from '../common/menu/menu.page';
+import { SharedModule } from '../shared/shared.module';
 
 @NgModule({
   imports: [
-    CommonModule,
-    FormsModule,
-    IonicModule,
     ReactiveFormsModule,
-    RecruiterHomePageRoutingModule
+    RecruiterHomePageRoutingModule,
+    SharedModule
   ],
-  declarations: [RecruiterHomePage,MenuPage]
+  declarations: [RecruiterHomePage]
 })
 export class RecruiterHomePageModule {}

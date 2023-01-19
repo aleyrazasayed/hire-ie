@@ -1,16 +1,27 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { MenuPage } from '../common/menu/menu.page';
 import { MenuPageModule } from '../common/menu/menu.module';
-
-
+import { FormsModule } from '@angular/forms';
+import { ReactiveFormsModule } from '@angular/forms';
+import { IonicModule } from '@ionic/angular';
+import { MenuPage } from '../common/menu/menu.page';
 
 @NgModule({
-  declarations: [MenuPage],
   imports: [
     CommonModule,
-     MenuPageModule
+    FormsModule,
+    ReactiveFormsModule,
+    IonicModule,
   ],
-  exports:[MenuPage]
+  exports: [
+    CommonModule,
+    FormsModule,
+    IonicModule,
+    MenuPage,
+    ReactiveFormsModule,
+  ],
+  declarations: [
+    MenuPage,
+  ],
 })
-export class SharedModule { }
+export class SharedModule {}

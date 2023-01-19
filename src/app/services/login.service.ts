@@ -1,17 +1,16 @@
 import { Injectable } from '@angular/core';
 import { AngularFirestore } from '@angular/fire/compat/firestore';
-import { map } from 'rxjs/operators'
+import { map } from 'rxjs/operators';
 
-import { Observable, Subject } from 'rxjs';
+import { from, fromEvent, Observable, Subject } from 'rxjs';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class LoginService {
-  private subject = new Subject<any>();
+  private subject = new Subject<boolean>();
 
-
-  constructor(private db: AngularFirestore) { }
+  constructor(private db: AngularFirestore) {}
 
   createUser(user: any) {
     const userData = JSON.parse(JSON.stringify(user));
@@ -19,15 +18,22 @@ export class LoginService {
   }
 
   getAllUsers(): Observable<any> {
-    const users = this.db.collection<any>('user').snapshotChanges().pipe(
-      map(actions => {
-        return actions.map(
-          c => ({
+    const users = this.db
+      .collection<any>('user')
+      .snapshotChanges()
+      .pipe(
+        map((actions) => {
+          return actions.map((c) => ({
             postId: c.payload.doc.id,
-            ...c.payload.doc.data()
+            ...c.payload.doc.data(),
           }));
-      }));
+        })
+      );
     return users;
+  }
+
+  updateUser(user: any, postId: string): Observable<any> {
+    return from(this.db.collection('user').doc(postId).update(user));
   }
 
   getUserbyId(id: string): Observable<any> {
@@ -35,12 +41,14 @@ export class LoginService {
     return userDetails;
   }
 
- getChangeUser(): Observable<any> {
-        return this.subject.asObservable();
-    }
+  getChangeUser(): Observable<any> {
+    return this.subject.asObservable();
+  }
 
-    
-    setUser() {
-      this.subject.next(true);
+  setUser() {
+    this.subject.next(true);
+  }
+  resetUser() {
+    this.subject.next(false);
   }
 }

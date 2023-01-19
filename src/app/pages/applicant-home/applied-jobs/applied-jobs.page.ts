@@ -11,29 +11,35 @@ import { ToasterService } from 'src/app/services/toaster.service';
 })
 export class AppliedJobsPage implements OnInit {
   isLoad = true;
-  pageName = 'Applied Jobs'
-  jobList: any = []
-  constructor(public toastr: ToasterService,public vibration: Vibration,public route: Router,public jobService: JobService) { }
+  pageName = 'Applied Jobs';
+  jobList: any = [];
+  constructor(
+    public toastr: ToasterService,
+    public vibration: Vibration,
+    public route: Router,
+    public jobService: JobService
+  ) {}
 
   ngOnInit() {
     this.getAppliedJObs();
   }
 
-
   getAppliedJObs() {
-    this.isLoad =  true;
-    this.jobService.getAppliedJobs().subscribe(resp=>{
-      console.log(resp)
+    this.isLoad = true;
+    this.jobService.getAppliedJobs().subscribe((resp) => {
+      console.log(resp);
       this.isLoad = false;
       this.jobList = resp;
-      this.jobList = this.jobList.filter((ele: { [x: string]: string | null; })=> ele['email'] === localStorage.getItem('email'));
-    }),((err: any) => {
-      this.toastr.presentToast('Something went wrong!','danger')
-      this.vibration.vibrate(1000);
-      console.log(err)
-      this.isLoad =  false;
-
-    });
+      this.jobList = this.jobList.filter(
+        (ele: { [x: string]: string | null }) =>
+          ele['email'] === localStorage.getItem('email')
+      );
+    }),
+      (err: any) => {
+        this.toastr.presentToast('Something went wrong!', 'danger');
+        this.vibration.vibrate(1000);
+        console.log(err);
+        this.isLoad = false;
+      };
   }
-
 }

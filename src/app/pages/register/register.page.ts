@@ -29,7 +29,7 @@ export class RegisterPage implements OnInit {
   }
 
   onSubmit() {
-      this.loginService.createUser(this.registerForm.value)
+      this.loginService.createUser({...this.registerForm.value})
       .then(() => {
         this.registerForm.reset();
         localStorage.clear();

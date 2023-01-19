@@ -1,4 +1,8 @@
-import { CUSTOM_ELEMENTS_SCHEMA, NgModule, NO_ERRORS_SCHEMA } from '@angular/core';
+import {
+  CUSTOM_ELEMENTS_SCHEMA,
+  NgModule,
+  NO_ERRORS_SCHEMA,
+} from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { RouteReuseStrategy } from '@angular/router';
 
@@ -12,23 +16,28 @@ import { AppRoutingModule } from './app-routing.module';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { environment } from 'src/environments/environment';
 import { Vibration } from '@awesome-cordova-plugins/vibration/ngx';
+import { SharedModule } from './pages/shared/shared.module';
 
 @NgModule({
-  declarations: [AppComponent], 
+  declarations: [AppComponent],
   entryComponents: [],
-  imports: [BrowserModule,
-    FormsModule,
-    ReactiveFormsModule,
+  imports: [
+    BrowserModule,
+    SharedModule,
+    IonicModule.forRoot({
+      mode: 'md',
+    }),
+    AppRoutingModule,
+    AngularFireModule.initializeApp(environment.firebase),
     AngularFireAuthModule,
     AngularFireStorageModule,
-    IonicModule.forRoot(),AngularFireStorageModule,AppRoutingModule,AngularFireModule.initializeApp(environment.firebase),AngularFireAuthModule,AngularFireDatabaseModule
+    AngularFireDatabaseModule,
   ],
-  providers: [{ provide: RouteReuseStrategy, useClass: IonicRouteStrategy }, Vibration],
+  providers: [
+    { provide: RouteReuseStrategy, useClass: IonicRouteStrategy },
+    Vibration,
+  ],
   bootstrap: [AppComponent],
-  schemas: [
-    CUSTOM_ELEMENTS_SCHEMA,NO_ERRORS_SCHEMA
-  ],
-
+  schemas: [CUSTOM_ELEMENTS_SCHEMA, NO_ERRORS_SCHEMA],
 })
 export class AppModule {}
-

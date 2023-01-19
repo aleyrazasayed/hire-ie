@@ -7,16 +7,13 @@ import { IonicModule } from '@ionic/angular';
 import { ViewJobPageRoutingModule } from './view-job-routing.module';
 
 import { ViewJobPage } from './view-job.page';
-import { MenuPageModule } from '../common/menu/menu.module';
-import { MenuPage } from '../common/menu/menu.page';
+import { SharedModule } from '../shared/shared.module';
 
 @NgModule({
   imports: [
-    CommonModule,
-    FormsModule,
-    IonicModule,
+    SharedModule,
     ViewJobPageRoutingModule,
   ],
-  declarations: [ViewJobPage, MenuPage]
+  declarations: [ViewJobPage]
 })
 export class ViewJobPageModule {}

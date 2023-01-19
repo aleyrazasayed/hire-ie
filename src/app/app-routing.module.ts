@@ -24,7 +24,11 @@ const routes: Routes = [
   },
   {
     path: 'applicant-home',
-    loadChildren: () => import('./pages/applicant-home/applicant-home.module').then( m => m.ApplicantHomePageModule)
+    loadChildren: () => import('./pages/applicant-home/applicant-home.module').then( m => m.ApplicantHomePageModule),
+  },
+  {
+    path: 'profile',
+    loadChildren: () => import('./pages/profile/profile.module').then( m => m.ProfilePageModule),
   },
   {
     path: 'saved-jobs',
@@ -41,7 +45,7 @@ const routes: Routes = [
   {
     path: 'view-job',
     loadChildren: () => import('./pages/view-job/view-job.module').then( m => m.ViewJobPageModule)
-  }
+  },
 ];
 
 @NgModule({
