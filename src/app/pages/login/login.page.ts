@@ -42,14 +42,16 @@ export class LoginPage implements OnInit, OnDestroy {
         userobj &&
         userobj.password === this.loginForm.get('password')?.value
       ) {
-        localStorage.setItem('email', this.loginForm.get('email')?.value);
+        sessionStorage.setItem('email', this.loginForm.get('email')?.value);
 
         userobj['isRecruiter'] == 'true'
           ? this.router.navigate(['recruiter-home'])
           : this.router.navigate(['applicant-home']);
         userobj['isRecruiter'] == 'true'
-          ? localStorage.setItem('isRecruiter', 'true')
-          : localStorage.setItem('isRecruiter', 'false');
+          ? sessionStorage.setItem('isRecruiter', 'true')
+          : sessionStorage.setItem('isRecruiter', 'false');
+          sessionStorage.setItem('isCvAttached','false')
+
         this.loginService.setUser();
         this.vibration.vibrate(1000);
         this.toastr.presentToast('User logged in successfully', 'success');
@@ -58,7 +60,7 @@ export class LoginPage implements OnInit, OnDestroy {
       }
     }),
       (err: any) => {
-        console.log(err);
+        ;
       };
   }
 

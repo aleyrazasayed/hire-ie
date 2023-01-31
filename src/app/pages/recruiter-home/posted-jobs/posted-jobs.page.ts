@@ -27,17 +27,17 @@ export class PostedJobsPage implements OnInit {
   getPostedJObs() {
     this.isLoad = true;
     this.jobService.getAllJobs().subscribe((resp) => {
-      console.log(resp);
+      ;
       this.isLoad = false;
       this.jobList = resp;
       this.jobList = this.jobList.filter(
         (ele: { [x: string]: string | null }) =>
-          ele['recruiterEmail'] === localStorage.getItem('email')
+          ele['recruiterEmail'] === sessionStorage.getItem('email')
       );
     }),
       (err: any) => {
         this.toastr.presentToast('Something went wrong!', 'danger');
-        console.log(err);
+        ;
         this.isLoad = false;
       };
   }
@@ -48,6 +48,10 @@ export class PostedJobsPage implements OnInit {
         object: this.jobList[i],
       },
     });
+  }
+
+  redirectPost(){
+  this.route.navigate(['recruiter-home'])
   }
 
   removeJob(index: any) {}

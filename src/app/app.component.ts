@@ -19,7 +19,6 @@ export class AppComponent implements OnInit {
     public loginService: LoginService
   ) {
     this.subscription = this.loginService.getChangeUser().subscribe((state) => {
-      console.log('state', state);
       this.setMenu();
     });
   }
@@ -38,28 +37,28 @@ export class AppComponent implements OnInit {
         url: 'posted-jobs',
         icon: 'briefcase',
         isForward: 'yes',
-        isShow: localStorage.getItem('isRecruiter') === 'true' ? true : false,
+        isShow: sessionStorage.getItem('isRecruiter') === 'true' ? true : false,
       },
       {
         title: 'Saved Jobs',
         url: 'saved-jobs',
         icon: 'briefcase',
         isForward: 'yes',
-        isShow: localStorage.getItem('isRecruiter') === 'true' ? false : true,
+        isShow: sessionStorage.getItem('isRecruiter') === 'true' ? false : true,
       },
       {
         title: 'Applied Jobs',
         url: 'applied-jobs',
         icon: 'briefcase',
         isForward: 'yes',
-        isShow: localStorage.getItem('isRecruiter') === 'true' ? false : true,
+        isShow: sessionStorage.getItem('isRecruiter') === 'true' ? false : true,
       },
       {
         title: 'Profile',
         url: 'profile',
         icon: 'briefcase',
         isForward: 'yes',
-        isShow: localStorage.getItem('isRecruiter') === 'true' ? false : true,
+        isShow: sessionStorage.getItem('isRecruiter') === 'true' ? false : true,
       },
       {
         title: 'Logout',

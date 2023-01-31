@@ -30,4 +30,12 @@
   <ion-card *ngIf="!jobList?.length">
     <ion-card-title>No Posted jobs!</ion-card-title>
   </ion-card>
+  <ion-row>
+    <ion-col>
+      <ion-button type="submit" color="dark" expand="block" (click)= "redirectPost()">Post Job</ion-button>
+      <!-- <a [routerLink]="['/forgot-password']" class="small-text">Forgot Password?</a> -->
+    </ion-col>
+  </ion-row>
+  <!-- <button class="btn btn-primary-flip btn-lg" *ngIf=" !isLogin"
+  (click)="redirectPost()">Partner with us</button> -->
 </ion-content>

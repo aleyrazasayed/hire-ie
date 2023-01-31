@@ -32,7 +32,7 @@ export class NotificationService {
 
     // On success, we should be able to receive notifications
     PushNotifications.addListener('registration', (token: Token) => {
-      localStorage.setItem('push_token', token.value);
+      sessionStorage.setItem('push_token', token.value);
     });
 
     // Some issue with our setup and push will not work
@@ -49,7 +49,7 @@ export class NotificationService {
       (notification: PushNotificationSchema) => {
         if (notification.data) {
           const payload = JSON.parse(notification.data);
-          if (localStorage.getItem('isRecruiter') == 'true') {
+          if (sessionStorage.getItem('isRecruiter') == 'true') {
             if (payload.forRecruiter) {
               this.toastService.presentToast(
                 `${notification.title}`,
@@ -79,7 +79,7 @@ export class NotificationService {
       (notification: ActionPerformed) => {
         if (notification.notification.data) {
           const payload = JSON.parse(notification.notification.data);
-          if (localStorage.getItem('isRecruiter') == 'true') {
+          if (sessionStorage.getItem('isRecruiter') == 'true') {
             if (payload.forRecruiter) {
               this.toastService.presentToast(
                 `${notification.notification.title}`,

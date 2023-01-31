@@ -27,18 +27,17 @@ export class AppliedJobsPage implements OnInit {
   getAppliedJObs() {
     this.isLoad = true;
     this.jobService.getAppliedJobs().subscribe((resp) => {
-      console.log(resp);
       this.isLoad = false;
       this.jobList = resp;
       this.jobList = this.jobList.filter(
         (ele: { [x: string]: string | null }) =>
-          ele['email'] === localStorage.getItem('email')
+          ele['email'] === sessionStorage.getItem('email')
       );
     }),
       (err: any) => {
         this.toastr.presentToast('Something went wrong!', 'danger');
         this.vibration.vibrate(1000);
-        console.log(err);
+        ;
         this.isLoad = false;
       };
   }

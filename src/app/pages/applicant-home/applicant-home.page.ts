@@ -45,7 +45,7 @@ export class ApplicantHomePage implements OnInit {
       date: [new Date()],
     });
     this.getAllJObs();
-    if (localStorage.getItem('isRecruiter') === 'false') {
+    if (sessionStorage.getItem('isRecruiter') === 'false') {
       this.getNotification();
     }
   }
@@ -57,7 +57,7 @@ export class ApplicantHomePage implements OnInit {
           res
             .filter(
               (item: any) =>
-                item.payload.email === localStorage.getItem('email')
+                item.payload.email === sessionStorage.getItem('email')
             )
             .map((item: any) => {
               item.isRead = true;
@@ -82,14 +82,12 @@ export class ApplicantHomePage implements OnInit {
   getAllJObs() {
     this.isLoad = true;
     this.jobService.getAllJobs().subscribe((resp) => {
-      console.log(resp);
       this.isLoad = false;
       this.jobList = resp;
     }),
       (err: any) => {
         this.toastr.presentToast('Something went wrong!', 'danger');
         this.vibration.vibrate(1000);
-        console.log(err);
         this.isLoad = false;
       };
   }
@@ -107,7 +105,7 @@ export class ApplicantHomePage implements OnInit {
     this.isAdded = !this.isAdded;
     this.jobList[index]['isSaved'] = !this.jobList[index]['isSaved'];
     const requestObj = job;
-    requestObj['email'] = localStorage.getItem('email');
+    requestObj['email'] = sessionStorage.getItem('email');
     this.jobService
       .saveJobs(requestObj)
       .then(() => {
@@ -124,7 +122,7 @@ export class ApplicantHomePage implements OnInit {
       .catch((err: any) => {
         this.toastr.presentToast('Something went wrong!', 'danger');
         this.vibration.vibrate(1000);
-        console.log(err);
+        ;
         this.isLoad = false;
       });
   }

@@ -28,17 +28,17 @@ export class SavedJobsPage implements OnInit {
   getSavedJObs() {
     this.isLoad = true;
     this.jobService.getSavedJobs().subscribe((resp) => {
-      console.log(resp);
+      ;
       this.isLoad = false;
       this.jobList = resp;
       this.jobList = this.jobList.filter(
         (ele: { [x: string]: string | null }) =>
-          ele['email'] === localStorage.getItem('email')
+          ele['email'] === sessionStorage.getItem('email')
       );
     }),
       (err: any) => {
         this.toastr.presentToast('Something went wrong!', 'danger');
-        console.log(err);
+        ;
         this.isLoad = false;
       };
   }

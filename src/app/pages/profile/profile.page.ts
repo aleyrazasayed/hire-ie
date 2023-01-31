@@ -49,7 +49,7 @@ export class ProfilePage implements OnInit {
     this.loginService.getAllUsers().subscribe((resp) => {
       const users = resp.filter(
         (user: any) =>
-          user.email === localStorage.getItem('email') &&
+          user.email === sessionStorage.getItem('email') &&
           user.isRecruiter == 'false'
       );
       if (users.length > 0) {
@@ -60,7 +60,7 @@ export class ProfilePage implements OnInit {
       this.loading = false;
     }),
       (err: any) => {
-        console.log(err);
+        ;
         this.loading = false;
       };
   }
@@ -105,6 +105,7 @@ export class ProfilePage implements OnInit {
                       url: url,
                     } 
                   });
+                  sessionStorage.setItem('isCvAttached','true')
                 this.loginService
                   .updateUser(user, this.user?.postId!)
                   .pipe(
@@ -113,7 +114,7 @@ export class ProfilePage implements OnInit {
                     }),
                     catchError((err) => {
                       this.loading = false;
-                      console.log(err);
+                      ;
                       return of(err);
                     })
                   )
@@ -123,7 +124,7 @@ export class ProfilePage implements OnInit {
           }),
           catchError((err) => {
             this.loading = false;
-            console.log(err);
+            ;
             return of(err);
           })
         )

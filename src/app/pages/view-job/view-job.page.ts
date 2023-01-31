@@ -2,7 +2,6 @@ import { ToasterService } from 'src/app/services/toaster.service';
 import { JobService } from './../../services/job.service';
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { NotificationService } from 'src/app/services/notification.service';
 import { InAppNotificationService } from 'src/app/services/inapp.notification.service';
 import { tap } from 'rxjs';
 
@@ -24,17 +23,27 @@ export class ViewJobPage implements OnInit {
     public jobService: JobService,
     private readonly notificationService: InAppNotificationService
   ) {
-    this.isRecruiter = localStorage.getItem('isRecruiter') === 'true';
+    this.isRecruiter = sessionStorage.getItem('isRecruiter') === 'true';
   }
 
   ngOnInit() {
     this.currentObj = this.route.getCurrentNavigation()?.extras?.state;
-    this.currentObj = this.currentObj['object'];
+    this.currentObj = this.currentObj && this.currentObj['object'];
+    if(!this.currentObj){
+      this.isRecruiter ? this.route.navigate(['recruiter-home'])
+      : this.route.navigate(['applicant-home']);
+    }
     if (this.isRecruiter) this.getJobApplicants();
   }
   applyJob(obj: any) {
+    if(!sessionStorage.getItem('isCvAttached')){
+      this.toastr.presentToast(
+        'Please update profile and attach CV',
+        'warning'
+      );
+    } else {
     const reqObj = obj;
-    reqObj['email'] = localStorage.getItem('email');
+    reqObj['email'] = sessionStorage.getItem('email');
     reqObj['status'] = 'pending';
     this.jobService.applyJob(reqObj).then(() => {
       const payload = {
@@ -52,6 +61,8 @@ export class ViewJobPage implements OnInit {
       this.isApplied = true;
     });
   }
+}
+    
 
   getJobApplicants() {
     this.jobService
@@ -86,7 +97,6 @@ export class ViewJobPage implements OnInit {
             'Application accepted successfully',
             'success'
           );
-          this.route.navigate(['posted-jobs']);
         })
       )
       .subscribe();

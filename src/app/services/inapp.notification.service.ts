@@ -11,7 +11,7 @@ export class InAppNotificationService {
   constructor(private db: AngularFirestore) {}
 
   getNotifications(): Observable<any> {
-    const isRecruiter = localStorage.getItem('isRecruiter');
+    const isRecruiter = sessionStorage.getItem('isRecruiter');
     const notifications = this.db
       .collection<any>('notifications', (ref) =>
         ref

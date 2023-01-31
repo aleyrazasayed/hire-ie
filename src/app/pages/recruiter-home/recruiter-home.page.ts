@@ -40,9 +40,9 @@ export class RecruiterHomePage implements OnInit {
       date: [new Date()],
       isSaved: [false],
       isApplied: [false],
-      recruiterEmail: [localStorage.getItem('email')],
+      recruiterEmail: [sessionStorage.getItem('email')],
     });
-    if (localStorage.getItem('isRecruiter') === 'true') {
+    if (sessionStorage.getItem('isRecruiter') === 'true') {
       this.getNotification();
     }
   }
@@ -54,7 +54,7 @@ export class RecruiterHomePage implements OnInit {
           res
             .filter(
               (item: any) =>
-                item.payload.recruiterEmail === localStorage.getItem('email')
+                item.payload.recruiterEmail === sessionStorage.getItem('email')
             )
             .map((item: any) => {
               item.isRead = true;
@@ -89,7 +89,10 @@ export class RecruiterHomePage implements OnInit {
       .catch((err: any) => {
         this.vibration.vibrate(1000);
         this.toastr.presentToast('Job posted successfully!', 'danger');
-        console.log(err);
+        ;
       });
+  }
+  redirectPost(){
+    this.router.navigate(['posted-jobs'])
   }
 }
